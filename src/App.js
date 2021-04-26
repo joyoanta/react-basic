@@ -6,10 +6,10 @@ function App() {
  
   const items = [
 
-    {name:'Photoshop', details:'This tools for photo editing on your mobile', price:'$45.50'},
-    {name:'Pdf', details:'This tools for reading on your mobile', price:'$5.50'},
-    {name:'Ilustator', details:'This tools for graphicsdesign in mobile ', price:'$55.50'},
-    {name:'Lightroom', details:'This tools for Image filture in mobile', price:'$85.50'}
+    {name:'Photoshop', details:'This tools for photo editing on your mobile', price:'$45.50', id:1},
+    {name:'Pdf', details:'This tools for reading on your mobile', price:'$5.50', key:2},
+    {name:'Ilustator', details:'This tools for graphicsdesign in mobile ', price:'$55.50', id:3},
+    {name:'Lightroom', details:'This tools for Image filture in mobile', price:'$85.50', id:4}
 
   ]
 
@@ -19,6 +19,7 @@ function App() {
 
       <Counter></Counter>
       <Usersinfo></Usersinfo>
+      <Posts></Posts>
 
 
       <ul>
@@ -115,13 +116,40 @@ function Usersinfo(params) {
 
     {
 
-    users.map (users =><li> {users.name}  </li>)
+    users.map (users =><li> {users.name} </li>)
     }
 
  </ul>
 
     </div>
   )
+  
+}
+
+
+
+function Posts(props) {
+
+  const [post, setPost] = useState([])
+
+  useEffect (()=>{
+
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res=>res.json())
+    .then(data=> setPost(data))
+
+  },[])
+
+return(
+
+
+      <div><h5>The Number of Post Available : {post.length} </h5>
+      
+  <ul> {post.map(post=><li>{post.title}</li>)} </ul>
+      
+      </div>
+
+)
   
 }
 
